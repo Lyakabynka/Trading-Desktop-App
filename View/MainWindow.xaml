@@ -1,0 +1,163 @@
+﻿<Window x:Class="EntityFramework_Exam.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EntityFramework_Exam.View"
+        xmlns:ViewModel="clr-namespace:EntityFramework_Exam.ViewModel"
+        xmlns:Converters="clr-namespace:EntityFramework_Exam.Service.Converters"
+        mc:Ignorable="d"
+        Name="mainWindow"
+        Title="MainWindow" Height="450" Width="800"
+        >
+    <Window.Style>
+        <Style TargetType="Window">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                        <GradientStop Color="#4b6cb7" Offset="0"></GradientStop>
+                        <GradientStop Color="#182848" Offset="1"></GradientStop>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Style>
+    <Window.DataContext>
+        <ViewModel:MainViewModel></ViewModel:MainViewModel>
+    </Window.DataContext>
+    <Window.Resources>
+        <Converters:UserMainConverter x:Key="userMainConverter"></Converters:UserMainConverter>
+    </Window.Resources>
+    <Grid>
+        <TextBlock Grid.ColumnSpan="8" FontSize="15" HorizontalAlignment="Left" Text="{Binding CurrentUser}" Margin="5,5,0,0"></TextBlock>
+        
+        
+        <Border Background="Transparent" BorderThickness="5" Grid.Column="0" Grid.Row="1" Grid.RowSpan="9" Grid.ColumnSpan="3" BorderBrush="LightBlue" Margin="0,5,0,0">
+        </Border>
+        <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" FontSize="15" Margin="10,10,0,0" Foreground="Navy">Items in Inventory</TextBlock>
+        <DataGrid Name="DataGrid_Items"
+                  Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" Grid.RowSpan="9" Margin="5"
+                  ItemsSource="{Binding CurrentUser_ItemsCollectionView}"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  CanUserReorderColumns="False"
+                  CanUserResizeRows="False"
+                  CanUserSortColumns="True"
+                  SelectionMode="Extended"
+                  Background="Transparent"
+                  RowBackground="Transparent"
+                  AlternatingRowBackground="Transparent"
+                  
+                  >
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Description}" Header="Description" Width="3*"/>
+                <DataGridTextColumn Binding="{Binding Weight}" Header="Weight" Width="2*"/>
+                <DataGridTextColumn Binding="{Binding ItemType}" Header="Class" Width="2*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+
+        <Border Background="Transparent" BorderThickness="5" Grid.Column="3" Grid.Row="1" Grid.RowSpan="9" Grid.ColumnSpan="3" BorderBrush="LightBlue" Margin="0,5,0,0">
+        </Border>
+        <TextBlock Grid.Row="1"
+                   Grid.Column="3"
+                   Grid.ColumnSpan="3"
+                   Grid.RowSpan="1"
+                   VerticalAlignment="Center"
+                   FontSize="13"
+                   Margin="10,10,0,0"
+                   Foreground="DodgerBlue"
+                   TextWrapping="Wrap"
+                   Text="{Binding CurrentUser.Username, StringFormat=' {0}`s Property '}"></TextBlock>
+        <DataGrid Name="DataGrid_Property"
+                  Grid.Column="3" Grid.Row="2" Grid.ColumnSpan="3" Grid.RowSpan="8" Margin="5"
+                  ItemsSource="{Binding CurrentUser_PropertiesCollectionView}"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  CanUserReorderColumns="False"
+                  CanUserResizeRows="False"
+                  CanUserSortColumns="True"
+                  SelectionMode="Extended"
+                  Background="Transparent"
+                  RowBackground="Transparent"
+                  AlternatingRowBackground="Transparent"
+                  
+                  >
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Description}" Header="Description" Width="2*"/>
+                <DataGridTextColumn Binding="{Binding PropertyType}" Header="Class" Width="1*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+
+        <Border Background="Transparent" BorderThickness="5" Grid.Column="6" Grid.Row="1" Grid.RowSpan="9" Grid.ColumnSpan="2" BorderBrush="LightBlue" Margin="0,5,0,0">
+        </Border>
+        <TextBlock Grid.Row="1"
+                   Grid.Column="6"
+                   Grid.ColumnSpan="2"
+                   Grid.RowSpan="1"
+                   VerticalAlignment="Center"
+                   FontSize="13"
+                   Margin="10,10,0,0"
+                   Foreground="DeepSkyBlue"
+                   TextWrapping="Wrap"
+                   Text="{Binding CurrentUser.Town, StringFormat='Players in {0}:'}"></TextBlock>
+        <DataGrid Name="DataGrid_UsersInTown"
+                  Grid.Column="6" Grid.Row="2" Grid.ColumnSpan="2" Grid.RowSpan="8" Margin="5"
+                  ItemsSource="{Binding CurrentUser_UsersInTownCollectionView}"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  CanUserReorderColumns="False"
+                  CanUserResizeRows="False"
+                  CanUserSortColumns="True"
+                  SelectionMode="Extended"
+                  Background="Transparent"
+                  RowBackground="Transparent"
+                  AlternatingRowBackground="Transparent"
+                  IsSynchronizedWithCurrentItem="True"
+                  >
+            <DataGrid.InputBindings>
+                <MouseBinding Gesture="LeftDoubleClick"
+                              Command="{Binding TradeWithUserCmd}">
+                    <MouseBinding.CommandParameter >
+                        <MultiBinding Converter="{StaticResource userMainConverter}">
+                            <Binding Path="SelectedItem" ElementName="DataGrid_UsersInTown"></Binding>
+                            <Binding ElementName="mainWindow"></Binding>
+                        </MultiBinding>
+                    </MouseBinding.CommandParameter>
+                </MouseBinding>
+            </DataGrid.InputBindings>
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Username}" Header="Username" Width="1*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.6*"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+    </Grid>
+</Window>

@@ -1,0 +1,55 @@
+﻿<Window x:Class="EntityFramework_Exam.View.RegistrationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EntityFramework_Exam.View"
+        xmlns:ViewModel="clr-namespace:EntityFramework_Exam.ViewModel"
+        xmlns:Converters="clr-namespace:EntityFramework_Exam.Service.Converters"
+        mc:Ignorable="d"
+        Title="Registration" Height="280" Width="300"
+        Name="registrationWindow"
+        ResizeMode="NoResize">
+    <Window.Style>
+        <Style TargetType="Window">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                        <GradientStop Color="#4b6cb7" Offset="0"></GradientStop>
+                        <GradientStop Color="#182848" Offset="1"></GradientStop>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Style>
+    <Window.DataContext>
+        <ViewModel:RegistrationViewModel></ViewModel:RegistrationViewModel>
+    </Window.DataContext>
+    <Window.Resources>
+        <Converters:UserRegistrationConverter x:Key="userRegistrationConverter"></Converters:UserRegistrationConverter>
+    </Window.Resources>
+    <StackPanel Orientation="Vertical">
+        <TextBlock Margin="10,20,10,5" FontSize="20" HorizontalAlignment="Center">Registration</TextBlock>
+        <TextBlock Margin="10,5,10,0" FontSize="15" Foreground="LightGray">Username:</TextBlock>
+        <TextBox x:Name="TextBox_Username" Margin="10,0,10,0" FontSize="15" Background="Transparent"></TextBox>
+        <TextBlock Margin="10,5,10,0" FontSize="15" Foreground="LightGray">Password:</TextBlock>
+        <TextBox x:Name="TextBox_Password" Margin="10,0,10,0" FontSize="15" Background="Transparent"></TextBox>
+
+        <TextBlock Margin="10,5,10,0" FontSize="15" Foreground="LightGray">Select your town:</TextBlock>
+        <ComboBox x:Name="ComboBox_Towns" Margin="10,0,10,0"
+                  ItemsSource="{Binding TownsCollectionView}" Background="Transparent"></ComboBox>
+
+        <Button Margin="25,15,25,0" FontSize="15" Content="Register" Command="{Binding CmdRegistration}"
+                Background="Transparent"
+                Foreground="LightBlue">
+            <Button.CommandParameter>
+                <MultiBinding Converter="{StaticResource userRegistrationConverter}">
+                    <Binding Path="Text" ElementName="TextBox_Username"></Binding>
+                    <Binding Path="Text" ElementName="TextBox_Password"></Binding>
+                    <Binding Path="SelectedItem" ElementName="ComboBox_Towns"></Binding>
+                    <Binding ElementName="registrationWindow"></Binding>
+                </MultiBinding>
+            </Button.CommandParameter>
+        </Button>
+    </StackPanel>
+</Window>
