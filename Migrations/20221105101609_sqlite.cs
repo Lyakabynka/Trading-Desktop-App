@@ -4,7 +4,7 @@
 
 namespace EntityFramework_Exam.Migrations
 {
-    public partial class Init : Migration
+    public partial class sqlite : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,9 +12,9 @@ namespace EntityFramework_Exam.Migrations
                 name: "ItemTypes",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -25,9 +25,9 @@ namespace EntityFramework_Exam.Migrations
                 name: "PropertyTypes",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -38,9 +38,9 @@ namespace EntityFramework_Exam.Migrations
                 name: "Towns",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -51,11 +51,11 @@ namespace EntityFramework_Exam.Migrations
                 name: "Items",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Weight = table.Column<double>(type: "float", nullable: false),
-                    ItemTypeId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Description = table.Column<string>(type: "TEXT", nullable: false),
+                    Weight = table.Column<double>(type: "REAL", nullable: false),
+                    ItemTypeId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -72,11 +72,11 @@ namespace EntityFramework_Exam.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Username = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TownId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Username = table.Column<string>(type: "TEXT", nullable: false),
+                    Password = table.Column<string>(type: "TEXT", nullable: false),
+                    TownId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -93,8 +93,8 @@ namespace EntityFramework_Exam.Migrations
                 name: "ItemUser",
                 columns: table => new
                 {
-                    ItemsId = table.Column<int>(type: "int", nullable: false),
-                    UsersId = table.Column<int>(type: "int", nullable: false)
+                    ItemsId = table.Column<int>(type: "INTEGER", nullable: false),
+                    UsersId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -117,12 +117,12 @@ namespace EntityFramework_Exam.Migrations
                 name: "Properties",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PropertyTypeId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: true),
-                    TownId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Description = table.Column<string>(type: "TEXT", nullable: false),
+                    PropertyTypeId = table.Column<int>(type: "INTEGER", nullable: false),
+                    UserId = table.Column<int>(type: "INTEGER", nullable: true),
+                    TownId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -150,11 +150,11 @@ namespace EntityFramework_Exam.Migrations
                 name: "Trades",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ItemId = table.Column<int>(type: "int", nullable: false),
-                    SellerId = table.Column<int>(type: "int", nullable: true),
-                    BuyerId = table.Column<int>(type: "int", nullable: true)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ItemId = table.Column<int>(type: "INTEGER", nullable: false),
+                    SellerId = table.Column<int>(type: "INTEGER", nullable: true),
+                    BuyerId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -180,37 +180,72 @@ namespace EntityFramework_Exam.Migrations
             migrationBuilder.InsertData(
                 table: "ItemTypes",
                 columns: new[] { "Id", "Name" },
-                values: new object[,]
-                {
-                    { 1, "Common" },
-                    { 2, "Uncommon" },
-                    { 3, "Rare" },
-                    { 4, "Epic" },
-                    { 5, "Legendary" }
-                });
+                values: new object[] { 1, "Common" });
+
+            migrationBuilder.InsertData(
+                table: "ItemTypes",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 2, "Uncommon" });
+
+            migrationBuilder.InsertData(
+                table: "ItemTypes",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 3, "Rare" });
+
+            migrationBuilder.InsertData(
+                table: "ItemTypes",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 4, "Epic" });
+
+            migrationBuilder.InsertData(
+                table: "ItemTypes",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 5, "Legendary" });
 
             migrationBuilder.InsertData(
                 table: "PropertyTypes",
                 columns: new[] { "Id", "Name" },
-                values: new object[,]
-                {
-                    { 1, "Flat" },
-                    { 2, "House" },
-                    { 3, "Penthouse" },
-                    { 4, "Mansion" }
-                });
+                values: new object[] { 1, "Flat" });
+
+            migrationBuilder.InsertData(
+                table: "PropertyTypes",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 2, "House" });
+
+            migrationBuilder.InsertData(
+                table: "PropertyTypes",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 3, "Penthouse" });
+
+            migrationBuilder.InsertData(
+                table: "PropertyTypes",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 4, "Mansion" });
 
             migrationBuilder.InsertData(
                 table: "Towns",
                 columns: new[] { "Id", "Name" },
-                values: new object[,]
-                {
-                    { 1, "Kyiv" },
-                    { 2, "Rome" },
-                    { 3, "Athens" },
-                    { 4, "Cairo" },
-                    { 5, "Paris" }
-                });
+                values: new object[] { 1, "Kyiv" });
+
+            migrationBuilder.InsertData(
+                table: "Towns",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 2, "Rome" });
+
+            migrationBuilder.InsertData(
+                table: "Towns",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 3, "Athens" });
+
+            migrationBuilder.InsertData(
+                table: "Towns",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 4, "Cairo" });
+
+            migrationBuilder.InsertData(
+                table: "Towns",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 5, "Paris" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Items_ItemTypeId",

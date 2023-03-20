@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "PZSRQGWvePp7w6KdnGGzxB+N93EKlXEaxm7GKzLHBAEBCeV31h3X9lMAiDdD+/CKShPeKNoMTf7sdmbwr2iZ9Q==",
+  "dgSpecHash": "J4n5CQTKSMPu2z2zcbPIoAbFZppIaXoy6PVAEqys0BuT8RRYOGgX+gUb+PyW9lVdEGE/bZTqBzjaGDWbbrKInw==",
   "success": true,
   "projectFilePath": "D:\\Code\\Visual Studio Projects\\EntityFramework_Exam\\EntityFramework_Exam\\EntityFramework_Exam.csproj",
   "expectedPackageFiles": [
@@ -58,7 +58,11 @@
     "C:\\Users\\dima1\\.nuget\\packages\\system.text.encoding.codepages\\4.7.0\\system.text.encoding.codepages.4.7.0.nupkg.sha512",
     "C:\\Users\\dima1\\.nuget\\packages\\system.text.encodings.web\\6.0.0\\system.text.encodings.web.6.0.0.nupkg.sha512",
     "C:\\Users\\dima1\\.nuget\\packages\\system.text.json\\6.0.0\\system.text.json.6.0.0.nupkg.sha512",
-    "C:\\Users\\dima1\\.nuget\\packages\\system.windows.extensions\\4.7.0\\system.windows.extensions.4.7.0.nupkg.sha512"
+    "C:\\Users\\dima1\\.nuget\\packages\\system.windows.extensions\\4.7.0\\system.windows.extensions.4.7.0.nupkg.sha512",
+    "C:\\Users\\dima1\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.15\\microsoft.windowsdesktop.app.ref.6.0.15.nupkg.sha512",
+    "C:\\Users\\dima1\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.15\\microsoft.netcore.app.ref.6.0.15.nupkg.sha512",
+    "C:\\Users\\dima1\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.15\\microsoft.aspnetcore.app.ref.6.0.15.nupkg.sha512",
+    "C:\\Users\\dima1\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.15\\microsoft.netcore.app.host.win-x64.6.0.15.nupkg.sha512"
   ],
   "logs": []
 }

@@ -87,8 +87,7 @@ namespace EntityFramework_Exam.Service
         {
             if (dbContext
                 .Users
-                .Where(u => u.Username == username)
-                .FirstOrDefault() != null)
+                .Any(u => u.Username == username))
             {
                 return true;
             }

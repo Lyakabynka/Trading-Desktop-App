@@ -9,6 +9,7 @@ namespace EntityFramework_Exam.Model
 {
     public class Property
     {
+        
         public int Id { get; set; }
         public string Description { get; set; }
 
